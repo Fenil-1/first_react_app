@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const SingleJobListing = ({job}) => {
     const [jobDetail , setJobDetail] = useState(false);
     let desc = job.description;
-    // console.log(desc)
+    // console.log(job)
     if(!jobDetail){
         desc = desc.slice(0,69)+'...';
     }

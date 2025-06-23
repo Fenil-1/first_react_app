@@ -3,10 +3,11 @@ import React from 'react'
 // import Spinner from '../components/Spinner'
 import {useLoaderData } from 'react-router-dom'
 import { FaArrowLeft, FaMapMarker  } from 'react-icons/fa';
-
+import { useNavigate } from 'react-router-dom';
 import {Link} from 'react-router-dom' 
+import {toast} from 'react-toastify'
 
-const SingleJobs = () => {
+const SingleJobs = ({deleteJob}) => {
     // const { id } = useParams()
 
     // const [job , setJob] = useState(null)
@@ -28,7 +29,18 @@ const SingleJobs = () => {
 
     //     fetchJob();
     // }, [])
-  
+
+    const navigate = useNavigate();
+
+    const OnClickDelete = (JobId) =>{
+      const confirm = window.confirm("are you sure?")
+      if(!confirm) return;
+      deleteJob(JobId);
+      toast.success('Deleted job successfully!!')
+      return navigate('/jobs');
+    }
+
+
     const job = useLoaderData();
     return (
         <>
@@ -106,11 +118,12 @@ const SingleJobs = () => {
             <div className="bg-white p-6 rounded-lg shadow-md mt-6">
               <h3 className="text-xl font-bold mb-6">Manage Job</h3>
               <Link
-                to={`/jobs/edit/${job.id}`}
+                to={`/edit-jobs/${job.id}`}
                 className="bg-indigo-500 hover:bg-indigo-600 text-white text-center font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
                 >Edit Job</Link
               >
               <button
+                onClick = {()=> OnClickDelete(job.id)}
                 className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
               >
                 Delete Job
@@ -127,8 +140,8 @@ const SingleJobs = () => {
 const loader = async({params})=>{
     const res = await fetch(`/api/jobs/${params.id}`)
     const data = await res.json()
-    console.log(data);
-    return data
+    // console.log(data);
+    return data;
 }
 
 export {SingleJobs as default , loader}
