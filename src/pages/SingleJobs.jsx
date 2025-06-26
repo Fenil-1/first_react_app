@@ -138,7 +138,7 @@ const SingleJobs = ({deleteJob}) => {
 }
 
 const loader = async({params})=>{
-    const res = await fetch(`/api/jobs/${params.id}`)
+    const res = await fetch(`${import.meta.env.VITE_API_BASE}/jobs/${params.id}`)
     const data = await res.json()
     // console.log(data);
     return data;

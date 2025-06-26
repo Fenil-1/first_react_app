@@ -12,7 +12,7 @@ import EditJobs from './pages/EditJobs';
 const App = () => {
   // Add new job
   const addingnewjob =async (newJob) => {
-    const res = await fetch('/api/jobs',{
+    const res = await fetch(`${import.meta.env.VITE_API_BASE}/jobs`,{
       method : 'POST',
       headers :{
         'Content-Type' : 'application.json'
@@ -23,13 +23,13 @@ const App = () => {
   }
   // Delete job
   const deleteJob = async(id) =>{
-    const res = await fetch(`/api/jobs/${id}`,{method : 'DELETE'})
+    const res = await fetch(`${import.meta.env.VITE_API_BASE}/jobs/${id}`,{method : 'DELETE'})
     return;
   }
 
   //  Edit job
   const editJob = async(editedJob)=>{ 
-   const res = await fetch(`/api/jobs/${editedJob.id}`,{
+   const res = await fetch(`${import.meta.env.VITE_API_BASE}/jobs/${editedJob.id}`,{
     method : 'PUT',
     headers : {
       'content-type' : 'application/json'
