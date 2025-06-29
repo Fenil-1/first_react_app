@@ -7,7 +7,7 @@ const SingleJobListing = ({job}) => {
     let desc = job.description;
     // console.log(job)
     if(!jobDetail){
-        desc = desc.slice(0,69)+'...';
+        desc = desc.substring(0,69)+'...';
     }
     
     const update = () =>{
